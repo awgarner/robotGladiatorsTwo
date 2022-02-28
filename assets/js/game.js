@@ -106,6 +106,14 @@ var startGame = function() {
             enemyHealth = 50;
             //passes the pickedEnemy
             fight(pickedEnemyName);
+            //if we're not at the last enemy in the array
+            if (playerHealth > 0 && i < enemyNames.length - 1) {
+                //ask if player wants to use the store before the next round
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round?")
+                if (storeConfirm) {
+                    shop();
+                }
+            }
         }
         else {
             window.alert("You have lost your robot in battle! Game Over!");
@@ -139,6 +147,49 @@ var endGame = function() {
         window.alert("Thank you for playing Robot Gladiators! Come back soon!")
     }
 }
+
+// Shop functionality
+
+var shop = function() {
+    //ask player what they'd like to do
+    var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', OR 'LEAVE' to make a choice. ")
+    //switch function decides what to do based on user input
+    switch(shopOptionPrompt) {
+        case "REFILL":
+        case "refill":
+            if (playerMoney >= 7) {   
+                window.alert("Refilling player's health by 20 for 7 dollars");
+
+                //increase health and decrease money
+                playerHealth = playerHealth + 20;
+                playerMoney = playerMoney - 7;
+            }
+            else {
+                window.alert("You don't have enough money!")
+            }
+            break;
+        case "UPGRADE":
+        case "upgrade":
+            if (playerMoney >= 7) {
+                window.alert("Upgrading player's attack by 6 for 7 dollars.")
+
+                //increase attack and decrease money
+                playerAttack = playerAttack + 6;
+                playerMoney = playerMoney - 7;
+            }
+            else {
+                window.alert("You don't have enough money!")
+            }
+            break;        
+        case "LEAVE":
+        case "leave":
+            window.alert("Leaving the store.")
+
+            //do nothing, so function will end
+            break;
+    }
+}
+
 
 //start the game when the page loads
 
