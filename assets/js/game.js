@@ -115,10 +115,6 @@ var startGame = function() {
 
     // after the for loop ends, player is either out of health or enemies to fight, so run the endGame function
     endGame();
-
-// play again
-    // startGame();
-
 }
 
 
