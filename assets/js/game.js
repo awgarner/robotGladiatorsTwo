@@ -18,7 +18,6 @@ var enemyAttack = 12;
 
 
 var fight = function(enemyName) {
-
     while(enemyHealth > 0 && playerHealth > 0) {
         
 
@@ -31,7 +30,7 @@ var fight = function(enemyName) {
             //confirms skip and subracts 2 from playerMoney
             if (confirmSkip) {
                 window.alert(playerName + " has decided to skip this fight. Goodbye!")
-                playerMoney = playerMoney - 10;
+                playerMoney = Math.max(0, playerMoney - 10);
                 console.log("playerMoney" , playerMoney);
                 break;
             }
@@ -41,9 +40,11 @@ var fight = function(enemyName) {
         if(promptFight === "fight" || promptFight === "FIGHT") {
 
 
-            //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
+            //generate random number damage value based on player's attack power
 
-            enemyHealth = enemyHealth - playerAttack;
+            var damage = randomNumber(playerAttack - 3, playerAttack);
+
+            enemyHealth = Math.max(0, enemyHealth - damage);
 
             // Log a resulting message to the console so we know that it worked.
 
@@ -63,7 +64,7 @@ var fight = function(enemyName) {
 
             // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable
 
-            playerHealth = playerHealth - enemyAttack;
+            playerHealth = Math.max(0, playerHealth - enemyAttack);
 
 
             // Log a resulting message to the console so we know that it worked.
@@ -103,7 +104,7 @@ var startGame = function() {
             //pickes new enemy to fight based on the index of the enemyNames array
             var pickedEnemyName = enemyNames[i];
             //resets enemyHealth each game
-            enemyHealth = 50;
+            enemyHealth = randomNumber(40, 60);
             //passes the pickedEnemy
             fight(pickedEnemyName);
             //if we're not at the last enemy in the array
@@ -188,6 +189,11 @@ var shop = function() {
             //do nothing, so function will end
             break;
     }
+}
+
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+    return value;
 }
 
 
