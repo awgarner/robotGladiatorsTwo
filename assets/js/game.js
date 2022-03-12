@@ -98,7 +98,7 @@ var startGame = function() {
     //reset player stats
     playerInfo.health = 100;
     playerInfo.attack = 10;
-    playerInfo.money = 10;
+    playerInfo.money = 100;
 
     for(var i = 0; i < enemyNames.length; i++) {
         if(playerInfo.health > 0) {
