@@ -7,6 +7,7 @@
 
 
 var fight = function(enemy) {
+
     while(enemy.health > 0 && playerInfo.health > 0) {
 
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.")
@@ -50,7 +51,7 @@ var fight = function(enemy) {
                 window.alert(enemy.name + " still has " + enemy.health + " health left.")
             }
 
-            // Subtract the value of `enemyAttack` from the value of `playerInfo.health` and use that result to update the value in the `playerInfo.health` variable
+            // Subtract the value of `enemy.attack` from the value of `playerInfo.health` and use that result to update the value in the `playerInfo.health` variable
 
             playerInfo.health = Math.max(0, playerInfo.health - enemy.attack);
 
@@ -80,8 +81,10 @@ var fight = function(enemy) {
 }
 
 var startGame = function() {
+
     //reset player stats
     playerInfo.reset();
+
 
     for(var i = 0; i < enemyInfo.length; i++) {
         if(playerInfo.health > 0) {
@@ -111,7 +114,6 @@ var startGame = function() {
     // after the for loop ends, player is either out of health or enemies to fight, so run the endGame function
     endGame();
 }
-
 
 var endGame = function() {
     //if player is still alive, player wins!
@@ -164,8 +166,21 @@ var randomNumber = function(min, max) {
     return value;
 }
 
+var getPlayerName = function () {
+    var name = "";
+
+    while (name === "" || name === null) {
+        name = prompt("What is your robot's name?")
+    }
+
+    console.log("Your robot's name is " + name);
+    return name;
+}
+
+
+
 var playerInfo = {
-    name: window.prompt("What is your robot's name?"),
+    name: getPlayerName(),
     health: 50,
     attack: 10,
     money: 100,
